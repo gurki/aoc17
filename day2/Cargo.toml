@@ -5,3 +5,4 @@ authors = ["Tobias Gurdan <tobias@gurdan.de>"]
 
 [dependencies]
 ansi_term = "0.9"
+num = "0.1.41"
