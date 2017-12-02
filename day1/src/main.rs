@@ -22,7 +22,7 @@ fn main()
     println!("Parser:");
 
     let c1 = contents.chars();
-    let c2 = contents.chars().cycle().skip(1);
+    let c2 = contents.chars().cycle().skip((len-1)/2);
     let c12 = c1.zip(c2);
 
     let redeq = |x: &(char, char)| {
