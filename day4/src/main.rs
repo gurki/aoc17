@@ -19,6 +19,16 @@ fn main() {
         return true;
     };
 
-    let count = contents.lines().filter(|line| unique_words(line)).count();
+    let unique_anagrams = |line: &str| {
+        let mut table = HashSet::<Vec<char>>::new();
+        for word in line.split_whitespace() {
+            let mut chars: Vec<char> = word.chars().collect();
+            chars.sort();
+            if table.contains(&chars) { return false; } else { table.insert(chars); }
+        };
+        return true;
+    };
+
+    let count = contents.lines().filter(|line| unique_anagrams(line)).count();
     println!("{}", count);
 }
