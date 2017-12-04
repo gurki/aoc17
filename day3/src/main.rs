@@ -1,7 +1,13 @@
+use std::collections::HashMap;
+
 fn main() {
     let mut size = 0;
     let mut pos = (0, 0);
-    let mut id = 1;
+    let mut field = HashMap::new();
+
+    let mut value: i32 = 1;
+    let target = 368078;
+    field.insert((0, 0), value);
 
     enum Direction {
         North,
@@ -10,8 +16,6 @@ fn main() {
         West,
     }
     let mut dir = Direction::East;
-
-    let target = 368078;
 
     fn mv(x: &mut (i32, i32), dir: &Direction) {
         match *dir {
@@ -22,24 +26,34 @@ fn main() {
         };
     };
 
-    while id < target {
+    fn get_val(f: &mut HashMap<(i32,i32),i32>, p: (i32, i32)) -> i32 {
+        return
+            *f.entry((p.0+0,p.1+0)).or_insert(0) +
+            *f.entry((p.0+1,p.1+0)).or_insert(0) +
+            *f.entry((p.0+1,p.1+1)).or_insert(0) +
+            *f.entry((p.0+0,p.1+1)).or_insert(0) +
+            *f.entry((p.0-1,p.1+1)).or_insert(0) +
+            *f.entry((p.0-1,p.1+0)).or_insert(0) +
+            *f.entry((p.0-1,p.1-1)).or_insert(0) +
+            *f.entry((p.0+0,p.1-1)).or_insert(0) +
+            *f.entry((p.0+1,p.1-1)).or_insert(0)
+    }
+
+    while value < target {
         mv(&mut pos, &dir);
-        println!("pos ({},{})", pos.0, pos.1);
+
+        value = get_val(&mut field, pos);
+        field.insert(pos, value);
+        println!("{}", value);
 
         match dir {
             Direction::East => if pos.0 > size {
                 size += 1;
-                println!("size {}", size);
                 dir = Direction::North;
-                println!("N");
             },
-            Direction::North => if pos.1 == -size { dir = Direction::West; println!("W"); },
-            Direction::West => if pos.0 == -size { dir = Direction::South; println!("S"); },
-            Direction::South => if pos.1 == size { dir = Direction::East; println!("E"); }
+            Direction::North => if pos.1 == -size { dir = Direction::West; },
+            Direction::West => if pos.0 == -size { dir = Direction::South; },
+            Direction::South => if pos.1 == size { dir = Direction::East; }
         }
-
-        id += 1;
     }
-
-    println!("{}", pos.0.abs() + pos.1.abs());
 }
