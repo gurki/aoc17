@@ -44,7 +44,6 @@ fn main() {
 
         value = get_val(&mut field, pos);
         field.insert(pos, value);
-        println!("{}", value);
 
         match dir {
             Direction::East => if pos.0 > size {
@@ -56,4 +55,6 @@ fn main() {
             Direction::South => if pos.1 == size { dir = Direction::East; }
         }
     }
+    
+    println!("{}", value);
 }
