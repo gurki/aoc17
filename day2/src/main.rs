@@ -1,4 +1,3 @@
-extern crate ansi_term;
 extern crate num;
 
 use std::cmp;

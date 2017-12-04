@@ -55,6 +55,6 @@ fn main() {
             Direction::South => if pos.1 == size { dir = Direction::East; }
         }
     }
-    
+
     println!("{}", value);
 }

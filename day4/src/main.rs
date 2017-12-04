@@ -1,9 +1,6 @@
-extern crate ansi_term;
-
 use std::fs::File;
 use std::io::prelude::*;
 use std::collections::HashSet;
-
 
 fn main() {
     //  read file
