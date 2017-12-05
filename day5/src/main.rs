@@ -13,7 +13,7 @@ fn main() {
 
     while pos >= 0 && pos < maze.len() as i32 {
         let dp = maze[ pos as usize ];
-        maze[ pos as usize ] += 1;
+        maze[ pos as usize ] += if dp >= 3 { -1 } else { 1 };
         pos += dp;
         steps += 1;
     }
