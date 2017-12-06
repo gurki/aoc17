@@ -15,6 +15,8 @@ fn main() {
     let mut configs = HashSet::new();
     let mut count = 0;
     let mut id;
+    let mut first_cycle = true;
+    let mut first_block = Vec::new();
 
     loop
     {
@@ -39,8 +41,24 @@ fn main() {
 
         count += 1;
 
-        if configs.contains(&blocks) {
-            break;
+        if first_cycle
+        {
+            if configs.contains(&blocks)
+            {
+                println!("first cycle done");
+                println!("count: {}", count);
+                println!("blocks: {:?}", blocks);
+
+                first_block = blocks.clone();
+                count = 0;
+                first_cycle = false;
+            }
+        }
+        else
+        {
+            if first_block == blocks {
+                break;
+            }
         }
     }
 
